@@ -1,14 +1,14 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
+import { lightBlue, red } from '@material-ui/core/colors';
 
 // Create a theme instance.
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: lightBlue[500],
     },
     secondary: {
-      main: '#19857b',
+      main: lightBlue[300],
     },
     error: {
       main: red.A400,
@@ -16,7 +16,18 @@ const theme = createMuiTheme({
     background: {
       default: '#fff',
     },
+    text: {
+      primary: '#000000',
+      secondary: '#212121',
+      disabled: '#e0e0e0',
+      hint: '#9e9e9e',
+    }
   },
+  typography: {
+    fontSize: 12,
+    h2: 18
+  }
+
 });
 
 export default theme;

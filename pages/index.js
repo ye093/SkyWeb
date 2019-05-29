@@ -1,36 +1,30 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import MuiLink from '@material-ui/core/Link';
-import ProTip from '../src/ProTip';
-import Link from '../src/Link';
+import { makeStyles, Paper, Box, Grid } from '@material-ui/core';
+import LoginForm from '../src/components/LoginForm';
 
-function MadeWithLove() {
+const useStyles = makeStyles(theme => ({
+    root: {
+        margin: '0 auto',
+    },
+    paper: {
+        margin: theme.spacing(1),
+        padding: theme.spacing(2),
+        backgroundColor: theme.palette.background.paper,
+        flexGrow: 1,
+    }
+}));
+
+function Index(props) {
+    const classes = useStyles();
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Built with love by the '}
-            <MuiLink color="inherit" href="https://material-ui.com/">
-                Material-UI
-      </MuiLink>
-            {' team.'}
-        </Typography>
+        <Grid className={classes.root} item md={6} lg={3}>
+            <Paper className={classes.paper}>
+                {/* 登录框 */}
+                <LoginForm />
+            </Paper>
+        </Grid>
     );
 }
 
-export default function Index() {
-    return (
-        <Container maxWidth="sm">
-            <Box my={4}>
-                <Typography variant="h4" component="h1" gutterBottom>
-                    Next.js v4-beta example
-        </Typography>
-                <Link href="/about" color="secondary">
-                    Go to the about page
-        </Link>
-                <ProTip />
-                <MadeWithLove />
-            </Box>
-        </Container>
-    );
-}
+
+export default Index;
