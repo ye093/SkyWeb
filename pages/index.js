@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Paper, Box, Grid } from '@material-ui/core';
 import LoginForm from '../src/components/LoginForm';
+import Router from 'next/router';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,7 +21,7 @@ function Index(props) {
         <Grid className={classes.root} item md={6} lg={3}>
             <Paper className={classes.paper}>
                 {/* 登录框 */}
-                <LoginForm />
+                <LoginForm onLogin={() => Router.push('/main')} />
             </Paper>
         </Grid>
     );

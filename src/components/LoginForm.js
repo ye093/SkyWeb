@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, Grid, Typography, TextField, FormControlLabel, Checkbox, Button, Box, Snackbar, Slide } from '@material-ui/core';
 import clsx from 'clsx';
 import Link from './Link';
+import { createHash } from 'crypto';
 
 // 登录样式
 const useStyles = makeStyles(theme => ({
@@ -42,6 +43,11 @@ function LoginForm(props) {
     const classes = useStyles();
 
     const [state, setState] = useState({});
+
+    const { onLogin } = props;
+
+
+
     // 错误提示
     const [{ show, message }, setToast] = useState({
         show: false,
@@ -69,17 +75,21 @@ function LoginForm(props) {
             return;
         }
 
+        const pwd = createHash('sha256').update(state.password).digest('hex');
+
 
 
         if (state.remember) {
             localStorage.setItem('username', state.username);
-            localStorage.setItem('password', state.password);
+            localStorage.setItem('password', pwd);
             localStorage.setItem('remember', true);
         } else {
             localStorage.removeItem('username');
             localStorage.removeItem('password');
             localStorage.removeItem('remember');
         }
+
+        onLogin();
 
 
     };
@@ -125,7 +135,7 @@ function LoginForm(props) {
                 ContentProps={{
                     'aria-describedby': 'message-id',
                 }}
-                message={<span id="message-id" style={{color: 'red'}}>{message}</span>}
+                message={<span id="message-id" style={{ color: 'red' }}>{message}</span>}
             />
         </Box>
     );
